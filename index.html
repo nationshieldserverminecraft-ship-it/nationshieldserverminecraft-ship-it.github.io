@@ -5,30 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>NationShield | РП политический сервер 1.21+</title>
     <style>
-        /* ---------- ТЁМНЫЙ СТИЛЬ + ПИКСЕЛЬНЫЙ ШРИФТ ---------- */
+        /* ---------- КУБИЧЕСКИЙ СТИЛЬ + ВАШ СОБСТВЕННЫЙ ШРИФТ MINECRAFT ---------- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        /* Подключаем ваш шрифт с GitHub */
         @font-face {
-            font-family: 'MinecraftPixel';
-            src: url('https://raw.githubusercontent.com/JonathonF/MinecraftFont/master/Minecraftia-Regular.ttf') format('truetype');
+            font-family: 'Minecraft Custom';
+            src: url('https://raw.githubusercontent.com/nationshieldserverminecraft-ship-it/nationshieldserverminecraft-ship-it.github.io/main/minecraft.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
         }
 
         body {
-            background-color: #0e0f10;
-            font-family: 'MinecraftPixel', 'Courier New', 'VT323', monospace;
+            background-color: #0a0a0c;
+            font-family: 'Minecraft Custom', 'Courier New', monospace;
             color: #e1e7f0;
             min-height: 100vh;
             padding: 1.5rem;
             position: relative;
+            font-size: 0.85rem;
         }
 
+        /* Фоновые изображения с переключением */
         body::before {
             content: "";
             position: fixed;
@@ -36,13 +39,19 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://raw.githubusercontent.com/nationshieldserverminecraft-ship-it/NationShieldServer/main/1683182731_fonzon-club-p-mainkraft-krasivo-45.jpg');
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
             background-attachment: fixed;
             filter: brightness(0.55) contrast(1.1);
             z-index: -2;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        /* Анимация смены фона */
+        @keyframes backgroundFade {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
 
         body::after {
@@ -52,7 +61,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(10, 10, 15, 0.5) 100%);
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(10, 10, 15, 0.6) 100%);
             z-index: -1;
             pointer-events: none;
         }
@@ -63,7 +72,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #0e0f10;
+            background: #0a0a0c;
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -78,7 +87,6 @@
         .loading-logo {
             width: 120px;
             height: 120px;
-            border-radius: 50%;
             border: 3px solid #e0b354;
             animation: pulseGlow 1.5s infinite;
             object-fit: cover;
@@ -90,9 +98,9 @@
             100% { box-shadow: 0 0 0 0 rgba(224, 179, 84, 0); transform: scale(0.98); }
         }
         .loading-text {
-            font-family: 'MinecraftPixel', monospace;
+            font-family: 'Minecraft Custom', monospace;
             color: #e0b354;
-            font-size: 1rem;
+            font-size: 0.9rem;
             letter-spacing: 4px;
             animation: blinkText 1.5s step-end infinite;
         }
@@ -102,11 +110,9 @@
         }
         .loading-progress {
             width: 200px;
-            height: 2px;
+            height: 3px;
             background: #2b2d31;
             margin-top: 20px;
-            border-radius: 2px;
-            overflow: hidden;
         }
         .loading-progress-bar {
             width: 0%;
@@ -127,9 +133,8 @@
             max-width: 1000px;
             width: 100%;
             margin: 100px auto 0 auto;
-            background: #1e1f22;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            background: #1a1c20;
+            box-shadow: 0 0 0 2px #2b2d31, 0 8px 16px rgba(0, 0, 0, 0.5);
             overflow: hidden;
         }
 
@@ -144,8 +149,7 @@
             z-index: 1000;
             width: 70px;
             height: 70px;
-            border-radius: 50%;
-            border: 2px solid #5865f2;
+            border: 3px solid #5865f2;
             cursor: pointer;
             object-fit: cover;
         }
@@ -153,39 +157,44 @@
         .site-header {
             text-align: center;
             margin-bottom: 1.5rem;
-            border-bottom: 2px solid #2b2d31;
+            border-bottom: 3px solid #2b2d31;
             padding-bottom: 1rem;
         }
         .site-title {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             background: linear-gradient(135deg, #ffffff 0%, #e0b354 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            font-family: 'MinecraftPixel', monospace;
+            font-family: 'Minecraft Custom', monospace;
+            letter-spacing: 2px;
         }
         .sub-badge {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #c9a54b;
-            margin-top: 8px;
+            margin-top: 6px;
+        }
+        
+        /* Исправление для буквы Й */
+        .sub-badge {
+            font-feature-settings: normal;
+            text-rendering: geometricPrecision;
         }
 
         .discord-tabs {
             display: flex;
-            gap: 0.25rem;
+            gap: 2px;
             background: #111214;
-            padding: 0.25rem;
-            border-radius: 12px;
+            padding: 2px;
             margin-bottom: 1.8rem;
         }
         .tab-btn {
             background: transparent;
             border: none;
-            padding: 0.6rem 1.2rem;
-            font-family: 'MinecraftPixel', monospace;
-            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            font-family: 'Minecraft Custom', monospace;
+            font-size: 0.8rem;
             color: #dbdee1;
-            border-radius: 10px;
             cursor: pointer;
             flex: 1;
             transition: all 0.2s ease;
@@ -197,13 +206,13 @@
         .tab-btn.active {
             background: #2b2d31;
             color: #e0b354;
+            border-bottom: 2px solid #e0b354;
         }
 
         .content-panel {
             background: #111214;
-            border-radius: 16px;
             padding: 1.5rem;
-            border: 1px solid #2b2d31;
+            border: 2px solid #2b2d31;
             min-height: 400px;
         }
         
@@ -234,11 +243,10 @@
         }
         .status-card {
             flex: 1;
-            background: #1a1b1e;
-            border-radius: 16px;
-            padding: 1rem;
+            background: #1a1c20;
+            padding: 0.8rem;
             text-align: center;
-            border: 1px solid #2b2d31;
+            border: 2px solid #2b2d31;
             transition: all 0.2s ease;
             cursor: pointer;
         }
@@ -247,19 +255,19 @@
             transform: translateY(-2px);
         }
         .status-label {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #e0b354;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         .status-value {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: bold;
             color: #e1e7f0;
         }
         .status-sub {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             color: #6d737c;
             margin-top: 6px;
         }
@@ -267,9 +275,7 @@
             display: inline-block;
             width: 10px;
             height: 10px;
-            border-radius: 50%;
             background-color: #4caf50;
-            box-shadow: 0 0 5px #4caf50;
             animation: pulse 1.5s infinite;
             margin-right: 6px;
         }
@@ -277,7 +283,6 @@
             display: inline-block;
             width: 10px;
             height: 10px;
-            border-radius: 50%;
             background-color: #f44336;
             margin-right: 6px;
         }
@@ -287,14 +292,13 @@
         }
 
         .players-list-container {
-            background: #1a1b1e;
-            border-radius: 16px;
+            background: #1a1c20;
             margin-top: 1rem;
             padding: 1rem;
-            border: 1px solid #2b2d31;
+            border: 2px solid #2b2d31;
         }
         .players-list-title {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: #e0b354;
             text-align: center;
             margin-bottom: 10px;
@@ -307,51 +311,49 @@
             justify-content: center;
         }
         .player-name-item {
-            background: #0e0f10;
+            background: #0a0a0c;
             padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #b5bac1;
             border: 1px solid #3b3f48;
         }
         .no-players-message {
             text-align: center;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #6d737c;
             padding: 8px;
         }
 
         .server-desc {
-            background: #1e1f22;
+            background: #1a1c20;
             border-left: 4px solid #e0b354;
-            padding: 0.8rem 1rem;
+            padding: 0.7rem 1rem;
             margin-bottom: 1rem;
-            border-radius: 8px;
+            font-size: 0.8rem;
         }
 
         .address-dark-card {
-            background: #1a1b1e;
-            border-radius: 16px;
+            background: #1a1c20;
             padding: 1rem;
             text-align: center;
             margin-bottom: 1rem;
+            border: 2px solid #2b2d31;
         }
         .ip-label {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #e0b354;
             margin-bottom: 8px;
         }
         .server-ip-clickable {
-            font-family: 'MinecraftPixel', monospace;
-            font-size: 1.2rem;
-            background: #0e0f10;
+            font-family: 'Minecraft Custom', monospace;
+            font-size: 1rem;
+            background: #0a0a0c;
             display: inline-block;
             padding: 0.5rem 1.2rem;
-            border-radius: 40px;
             color: #e1e7f0;
-            border: 1px solid #3b3f48;
+            border: 2px solid #3b3f48;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -361,31 +363,30 @@
             color: #e0b354;
         }
         .copy-hint {
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             margin-top: 8px;
             color: #6d737c;
         }
 
         /* ФОРМА АНКЕТЫ */
         .form-group {
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
         }
         .form-group label {
             display: block;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #e0b354;
             margin-bottom: 5px;
             letter-spacing: 1px;
         }
         .form-group input {
             width: 100%;
-            padding: 10px 12px;
-            background: #0e0f10;
-            border: 1px solid #3b3f48;
-            border-radius: 8px;
+            padding: 8px 12px;
+            background: #0a0a0c;
+            border: 2px solid #3b3f48;
             color: #e1e7f0;
-            font-family: 'MinecraftPixel', monospace;
-            font-size: 0.8rem;
+            font-family: 'Minecraft Custom', monospace;
+            font-size: 0.75rem;
         }
         .form-group input:focus {
             outline: none;
@@ -394,7 +395,7 @@
         .form-row {
             display: flex;
             gap: 1rem;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
         }
         .form-row .form-group {
             flex: 1;
@@ -402,28 +403,27 @@
         }
         .optional {
             color: #6d737c;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             margin-left: 5px;
         }
         
         .checkbox-group {
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 10px;
-            background: #1a1b1e;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #2b2d31;
+            background: #1a1c20;
+            padding: 10px;
+            border: 2px solid #2b2d31;
         }
         .checkbox-group input {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             cursor: pointer;
             accent-color: #e0b354;
         }
         .checkbox-group label {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #dbdee1;
             cursor: pointer;
             margin: 0;
@@ -440,37 +440,36 @@
         .warning-text {
             background: rgba(224, 179, 84, 0.1);
             border-left: 3px solid #e0b354;
-            padding: 10px 12px;
-            font-size: 0.65rem;
+            padding: 8px 12px;
+            font-size: 0.6rem;
             color: #e0b354;
             text-align: center;
             margin-top: 8px;
             margin-bottom: 12px;
-            border-radius: 8px;
         }
         
         .cooldown-text {
             background: rgba(224, 179, 84, 0.1);
             border-left: 3px solid #e0b354;
-            padding: 10px 12px;
-            font-size: 0.65rem;
+            padding: 8px 12px;
+            font-size: 0.6rem;
             color: #e0b354;
             text-align: center;
             margin-top: 8px;
             margin-bottom: 12px;
-            border-radius: 8px;
         }
         
         .submit-btn {
             background: #e0b354;
             border: none;
-            padding: 10px 20px;
-            border-radius: 40px;
-            color: #0e0f10;
-            font-family: 'MinecraftPixel', monospace;
+            padding: 8px 20px;
+            color: #0a0a0c;
+            font-family: 'Minecraft Custom', monospace;
             cursor: pointer;
             width: 100%;
             transition: all 0.2s;
+            border: 2px solid #e0b354;
+            font-size: 0.75rem;
         }
         .submit-btn:hover {
             background: #f0c674;
@@ -481,19 +480,20 @@
             color: #6d737c;
             cursor: not-allowed;
             transform: none;
+            border-color: #3b3f48;
         }
         
         .action-btn {
             background: #e0b354;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 40px;
-            color: #0e0f10;
-            font-family: 'MinecraftPixel', monospace;
+            border: 2px solid #e0b354;
+            padding: 8px 20px;
+            color: #0a0a0c;
+            font-family: 'Minecraft Custom', monospace;
             cursor: pointer;
             flex: 1;
             transition: all 0.2s;
             letter-spacing: 1px;
+            font-size: 0.75rem;
         }
         .action-btn:hover {
             background: #f0c674;
@@ -502,13 +502,12 @@
         
         .logout-btn {
             background: #4a4a4a;
-            border: none;
+            border: 1px solid #6d737c;
             padding: 4px 12px;
-            border-radius: 20px;
             color: #dbdee1;
             cursor: pointer;
-            font-family: 'MinecraftPixel', monospace;
-            font-size: 0.65rem;
+            font-family: 'Minecraft Custom', monospace;
+            font-size: 0.6rem;
             transition: all 0.3s ease;
         }
         .logout-btn:hover {
@@ -520,15 +519,15 @@
             text-align: center;
             margin-top: 1.5rem;
             padding-top: 1rem;
-            border-top: 1px solid #2b2d31;
-            font-size: 0.65rem;
+            border-top: 2px solid #2b2d31;
+            font-size: 0.6rem;
             color: #6d737c;
         }
         .version-hidden {
             position: fixed;
             bottom: 6px;
             right: 8px;
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             color: rgba(109, 115, 124, 0.4);
             z-index: 100;
         }
@@ -538,12 +537,11 @@
             bottom: 2rem;
             left: 50%;
             transform: translateX(-50%);
-            background: #1e1f22;
-            border: 1px solid #e0b354;
-            border-radius: 40px;
-            padding: 0.6rem 1.6rem;
-            font-family: 'MinecraftPixel', monospace;
-            font-size: 0.7rem;
+            background: #1a1c20;
+            border: 2px solid #e0b354;
+            padding: 0.5rem 1.2rem;
+            font-family: 'Minecraft Custom', monospace;
+            font-size: 0.65rem;
             color: #e0b354;
             z-index: 999;
             backdrop-filter: blur(8px);
@@ -565,7 +563,7 @@
         
         @media (max-width: 650px) {
             body { padding: 0.8rem; }
-            .site-title { font-size: 1.8rem; }
+            .site-title { font-size: 1.6rem; }
             .corner-logo { width: 50px; height: 50px; }
             .status-value { font-size: 1.2rem; }
             .status-grid { flex-direction: column; gap: 0.8rem; }
@@ -652,7 +650,7 @@
                     </div>
 
                     <div id="anketaFormBlock" style="display: none;">
-                        <div id="userInfo" style="background: #1a1b1e; padding: 12px; border-radius: 8px; margin-bottom: 15px; text-align: center; font-family: 'MinecraftPixel', monospace; font-size: 0.7rem;">
+                        <div id="userInfo" style="background: #1a1c20; padding: 12px; margin-bottom: 15px; text-align: center; font-family: 'Minecraft Custom', monospace; font-size: 0.65rem; border: 2px solid #2b2d31;">
                             ВЫ ВОШЛИ КАК <span id="currentUser" style="color:#e0b354;"></span>
                             <button id="logoutBtn" class="logout-btn" style="margin-left: 15px;">ВЫЙТИ</button>
                         </div>
@@ -665,11 +663,11 @@
                                 <input type="text" id="minecraftNick" required placeholder="Ваш ник в Minecraft">
                             </div>
                             <div class="form-group">
-                                <label>DISCORD <span class="optional">(никнейм или ID)</span></label>
+                                <label>DISCORD (никнейм или ID)</label>
                                 <input type="text" id="discord" placeholder="username#0000">
                             </div>
                             <div class="form-group">
-                                <label>TELEGRAM <span class="optional">(никнейм)</span></label>
+                                <label>TELEGRAM (никнейм)</label>
                                 <input type="text" id="telegram" placeholder="@username">
                             </div>
                             
@@ -681,7 +679,7 @@
                             </div>
                             
                             <div class="warning-text">
-                                БЕЗ ПОДПИСКИ НА DISCORD ЗАЯВКА БУДЕТ ОТКЛОНЕНА
+                                УКАЖИТЕ ХОТЯ БЫ ОДИН КОНТАКТ (DISCORD ИЛИ TELEGRAM) ДЛЯ СВЯЗИ
                             </div>
                             
                             <button type="submit" class="submit-btn" id="anketaSubmitBtn">ОТПРАВИТЬ ЗАЯВКУ</button>
@@ -691,16 +689,16 @@
 
                 <div id="rules" class="tab-pane">
                     <div style="text-align:center; margin-bottom:1rem;">
-                        <h2 style="font-size:1.2rem; color:#e0b354;">ПРАВИЛА NATIONSHIELD</h2>
+                        <h2 style="font-size:1.1rem; color:#e0b354;">ПРАВИЛА NATIONSHIELD</h2>
                     </div>
                     <div class="warning-text" style="margin-bottom:1rem;">ЗАПРЕЩЕНО</div>
                     <ul style="list-style:none; padding-left:0.5rem;">
-                        <li style="margin-bottom:0.8rem; border-left:2px solid #e0b354; padding-left:0.8rem;"><strong>1.1</strong> - Спам реклама, Флуд.</li>
-                        <li style="margin-bottom:0.8rem; border-left:2px solid #e0b354; padding-left:0.8rem;"><strong>1.2</strong> - 18+ контент: Ссылки на 18+ сайты, пиксель арты и тд</li>
-                        <li style="margin-bottom:0.8rem; border-left:2px solid #e0b354; padding-left:0.8rem;"><strong>1.3</strong> - Объявление войны/нападение на другое государство пока в сети нету хотя бы 1 гражданина их гос-во</li>
-                        <li style="margin-bottom:0.8rem; border-left:2px solid #e0b354; padding-left:0.8rem;"><strong>1.4</strong> - если игрок объявил войну и после не заходил в онлайн 4 дня, то начинается мирный договор, который запрещено нарушать 3 дня.</li>
-                        <li style="margin-bottom:0.8rem; border-left:2px solid #e0b354; padding-left:0.8rem;"><strong>1.5</strong> - использование чит клиентов и модов (XRAY, killaura, autototem). Мини-карты разрешены.</li>
-                        <li style="margin-bottom:0.8rem; border-left:2px solid #e0b354; padding-left:0.8rem;"><strong>1.6</strong> - слив личной информации без согласия человека.</li>
+                        <li style="margin-bottom:0.8rem; border-left:3px solid #e0b354; padding-left:0.8rem; font-size:0.75rem;"><strong>1.1</strong> - Спам реклама, Флуд.</li>
+                        <li style="margin-bottom:0.8rem; border-left:3px solid #e0b354; padding-left:0.8rem; font-size:0.75rem;"><strong>1.2</strong> - 18+ контент: Ссылки на 18+ сайты, пиксель арты и тд</li>
+                        <li style="margin-bottom:0.8rem; border-left:3px solid #e0b354; padding-left:0.8rem; font-size:0.75rem;"><strong>1.3</strong> - Объявление войны/нападение на другое государство пока в сети нету хотя бы 1 гражданина их гос-во</li>
+                        <li style="margin-bottom:0.8rem; border-left:3px solid #e0b354; padding-left:0.8rem; font-size:0.75rem;"><strong>1.4</strong> - если игрок объявил войну и после не заходил в онлайн 4 дня, то начинается мирный договор, который запрещено нарушать 3 дня.</li>
+                        <li style="margin-bottom:0.8rem; border-left:3px solid #e0b354; padding-left:0.8rem; font-size:0.75rem;"><strong>1.5</strong> - использование чит клиентов и модов (XRAY, killaura, autototem). Мини-карты разрешены.</li>
+                        <li style="margin-bottom:0.8rem; border-left:3px solid #e0b354; padding-left:0.8rem; font-size:0.75rem;"><strong>1.6</strong> - слив личной информации без согласия человека.</li>
                     </ul>
                 </div>
             </div>
@@ -716,10 +714,35 @@
 
 <script>
     // ========== НАСТРОЙКИ ==========
+    const SERVER_ADDRESS = "NationShieldII.play-minecraft.net";
     const JSONBIN_BIN_ID = "69eb0f90aaba882197310951";
     const JSONBIN_API_KEY = "$2a$10$fbO1e/jkjaUXf51MQ3MROuFBtReAgofzV8SnwMMaRBMoJAp9eGlEu";
     const WEBHOOK_URL = "https://discord.com/api/webhooks/1496602268030472205/ASbXtHZpYYXnewToI1uxbPhrmejEvdO6bow7TicNeLFxOEADJNrt1aEyhpnpIHcEu6Rv";
     const COOLDOWN_MS = 4 * 60 * 60 * 1000;
+
+    // ========== ШИФРОВАНИЕ ПАРОЛЕЙ (XOR с ключом) ==========
+    const ENCRYPT_KEY = 0x5A; // Ключ шифрования
+    
+    function encryptPassword(password) {
+        let encrypted = '';
+        for (let i = 0; i < password.length; i++) {
+            encrypted += String.fromCharCode(password.charCodeAt(i) ^ ENCRYPT_KEY);
+        }
+        return btoa(encrypted); // Base64 для безопасного хранения
+    }
+    
+    function decryptPassword(encryptedBase64) {
+        try {
+            const encrypted = atob(encryptedBase64);
+            let decrypted = '';
+            for (let i = 0; i < encrypted.length; i++) {
+                decrypted += String.fromCharCode(encrypted.charCodeAt(i) ^ ENCRYPT_KEY);
+            }
+            return decrypted;
+        } catch(e) {
+            return '';
+        }
+    }
 
     let currentUser = null;
     let usersArray = [];
@@ -806,10 +829,13 @@
         const now = new Date();
         const formattedDate = `${now.getDate().toString().padStart(2,'0')}.${(now.getMonth()+1).toString().padStart(2,'0')}.${now.getFullYear()}, ${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}`;
         
+        // Сохраняем ЗАШИФРОВАННЫЙ пароль
+        const encryptedPassword = encryptPassword(password);
+        
         usersArray.push({
             email: email,
             username: username,
-            password: password,
+            password: encryptedPassword,
             registeredAt: formattedDate,
             lastApply: null
         });
@@ -826,7 +852,10 @@
             showToast('ПОЛЬЗОВАТЕЛЬ НЕ НАЙДЕН', 'error');
             return false;
         }
-        if (user.password !== password) {
+        
+        // Расшифровываем пароль из хранилища и сравниваем
+        const storedPassword = decryptPassword(user.password);
+        if (storedPassword !== password) {
             showToast('НЕВЕРНЫЙ ПАРОЛЬ', 'error');
             return false;
         }
@@ -987,6 +1016,33 @@
 
     init();
 
+    // ========== ПЕРЕКЛЮЧЕНИЕ ФОНОВЫХ ИЗОБРАЖЕНИЙ ==========
+    const backgrounds = [
+        'https://raw.githubusercontent.com/nationshieldserverminecraft-ship-it/nationshieldserverminecraft-ship-it.github.io/main/d79b83e54a58c9e29a1cd4f5d59951f1.jpg',
+        'https://raw.githubusercontent.com/nationshieldserverminecraft-ship-it/nationshieldserverminecraft-ship-it.github.io/main/5e24d87ca94a723d653f026aee0c8597.jpg',
+        'https://raw.githubusercontent.com/nationshieldserverminecraft-ship-it/nationshieldserverminecraft-ship-it.github.io/main/279633a822d7f5f5314300f3bd2ceedb%20(1).jpg'
+    ];
+    
+    let currentBgIndex = 0;
+    const bodyElement = document.body;
+    
+    function setBackground(index) {
+        if (backgrounds[index]) {
+            bodyElement.style.setProperty('background-image', `url('${backgrounds[index]}')`);
+        }
+    }
+    
+    function rotateBackground() {
+        currentBgIndex = (currentBgIndex + 1) % backgrounds.length;
+        setBackground(currentBgIndex);
+    }
+    
+    // Устанавливаем первый фон и запускаем ротацию каждые 15 секунд
+    if (backgrounds.length > 0) {
+        setBackground(0);
+        setInterval(rotateBackground, 15000);
+    }
+
     // ========== ВКЛАДКИ ==========
     const tabs = document.querySelectorAll('.tab-btn');
     const panes = document.querySelectorAll('.tab-pane');
@@ -1001,18 +1057,43 @@
     });
 
     // ========== КОПИРОВАНИЕ АДРЕСА ==========
-    const serverAddress = "Nationshield.play-creative.com";
     const ipElement = document.getElementById('clickableIp');
-    async function copyServerIp() {
+    
+    function copyServerIp() {
+        const textToCopy = SERVER_ADDRESS;
+        
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showToast(`СКОПИРОВАНО: ${SERVER_ADDRESS}`, 'success');
+                ipElement.style.transform = 'scale(0.97)';
+                setTimeout(() => ipElement.style.transform = '', 120);
+            }).catch(() => {
+                fallbackCopy(textToCopy);
+            });
+        } else {
+            fallbackCopy(textToCopy);
+        }
+    }
+    
+    function fallbackCopy(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.top = '-9999px';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
         try {
-            await navigator.clipboard.writeText(serverAddress);
-            showToast(`СКОПИРОВАНО: ${serverAddress}`, 'success');
+            document.execCommand('copy');
+            showToast(`СКОПИРОВАНО: ${SERVER_ADDRESS}`, 'success');
             ipElement.style.transform = 'scale(0.97)';
             setTimeout(() => ipElement.style.transform = '', 120);
         } catch (err) {
-            showToast(`ОШИБКА КОПИРОВАНИЯ`, 'error');
+            showToast(`НЕ УДАЛОСЬ СКОПИРОВАТЬ. АДРЕС: ${SERVER_ADDRESS}`, 'error');
         }
+        document.body.removeChild(textarea);
     }
+    
     if (ipElement) {
         ipElement.addEventListener('click', copyServerIp);
         ipElement.style.cursor = 'pointer';
@@ -1070,7 +1151,7 @@
     
     async function fetchServerStatus() {
         try {
-            const response = await fetch(`https://api.mcsrvstat.us/2/${serverAddress}`);
+            const response = await fetch(`https://api.mcsrvstat.us/2/${SERVER_ADDRESS}`);
             const data = await response.json();
             if (data.online) {
                 isOnline = true;
